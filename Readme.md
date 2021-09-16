@@ -65,7 +65,7 @@ CMD ["java", "server.ServerApp", "1111", "5555"]
 ##### 1. Build 
 
 * Run `docker build -t <SERVER_IMAGE> --target server-build .` to build the server docker images.
-* This example should create two images `client-build` and `server-build`
+* This example should create a docker image named <SERVER_IMAGE>.
 * Entrypoint is defined for server using CMD, but not for client as we need to run it manually with interactive option to input our desired operations from the console.  
 * Note: `bellsoft/liberica-openjdk-alpine-musl:11` is an alpine based image that works on M1 Apple Silicon chips. You could choose any default linux/windows based images from [openJDK](https://hub.docker.com/_/openjdk).
 
@@ -77,6 +77,7 @@ CMD ["java", "server.ServerApp", "1111", "5555"]
 
 ##### 3. Running client
 
+* Build `docker build -t $CLIENT_IMAGE --target client-build .`
 * Run `docker run -it --rm --name <CLIENT_CONTAINER> <CLIENT_IMAGE> java client.ClientApp localhost 1111 tcp` should run the client docker image on interactive mode
 * This can now be tested with your server running on localhost (not the docker container, yet)
 
@@ -87,6 +88,7 @@ Note: Both server and client docker containers are not on the local host network
 * Run `docker network create <PROJECT_NETWORK>` to create a network
 * Attach the containers with `--network <PROJECT_NETWORK>` option while running your server or client containers
 * Example: `docker run -p 1111:1111/tcp -p 5555:5555/udp --name <SERVER_CONTAINER> --network <PROJECT_NETWORK> <SERVER_IMAGE>`
+* Note: dockers attached to custom networks have default DNS as container name, hence we can use docker container name instead of virtual IP address or localhost.
 
 #### Scripting
 * We can automate all 4 steps above using shell scripts to avoid repeating frequently used commands
@@ -161,8 +163,7 @@ Note: Do not forget to change the permission of sh files to executable `chmod +x
 * list running containers - `docker container ls`
 * list all containers - `docker container ls -a`
 * list all networks - `docker network ls`
-* inspect containers attached to a network - `docker network inspect <container name>`
-  * note: dockers attached to custom networks have default DNS as container name, hence we pass docker container name instead of virtual IP address or localhost.
+* inspect containers attached to a network - `docker network inspect <network name>`
 * stop running container - `docker container stop <name>`
 * delete container - `docker container rm <name>`
 * delete network - `docker network rm <name>`
