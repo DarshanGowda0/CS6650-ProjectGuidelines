@@ -59,6 +59,7 @@ FROM bellsoft/liberica-openjdk-alpine-musl:11 AS server-build
 COPY . /usr/src/myapp
 WORKDIR /usr/src/myapp
 RUN javac server/*.java
+# cmd to run server locally - java server.ServerApp 1111 5555
 CMD ["java", "server.ServerApp", "1111", "5555"]
 ```
 
@@ -144,6 +145,7 @@ fi
 docker run -it --rm --name "$1" \
  --network $PROJECT_NETWORK $CLIENT_IMAGE \
  java client.ClientApp $SERVER_CONTAINER "$2" "$3"
+ # cmd to run client locally - java client.ClientApp localhost 1111 tcp
 ```
 
 * `run_client.sh` script above, should help you start a client container on the same network
