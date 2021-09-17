@@ -172,5 +172,6 @@ Note: Do not forget to change the permission of sh files to executable `chmod +x
 ## TL;DR
 * Use the Dockerfile provided to package your server and client apps as Docker containers.
 * Use the provided shell scripts to automate deployment and running of those containers.
+* You only need to modify last line of `Dockerfile` with your server args and last line of `run_client.sh` with your client args
 
 ### Feel free to use any of these files as is or modify according to your needs! 
