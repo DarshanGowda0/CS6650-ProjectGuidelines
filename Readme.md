@@ -40,7 +40,7 @@ src
 
 2 directories, 19 files
 ```
-* Compiling the code `javac server/*.java client/*.java` should create an `out` directory
+* Compile the code using `javac server/*.java client/*.java`
 * server usage should then be similar to `java server.ServerApp <tcp-port-number> <udp-port-number>`
 * client usage should then be similar to `java client.ClientApp <host-name> <port-number> <protocol>`
 #### Dockerfile
@@ -78,7 +78,7 @@ CMD ["java", "server.ServerApp", "1111", "5555"]
 
 ##### 3. Running client
 
-* Build `docker build -t $CLIENT_IMAGE --target client-build .`
+* Build `docker build -t <CLIENT_IMAGE> --target client-build .`
 * Run `docker run -it --rm --name <CLIENT_CONTAINER> <CLIENT_IMAGE> java client.ClientApp localhost 1111 tcp` should run the client docker image on interactive mode
 * This can now be tested with your server running on localhost (not the docker container, yet)
 
